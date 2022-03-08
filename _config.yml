@@ -4,10 +4,10 @@
 baseurl:
 url: https://ninghuang456.github.io/blog/
 date_format: "ordinal"
-title: 码志
-subtitle: "公众号：闷骚的程序员"
-description: "马壮的个人博客，公众号：闷骚的程序员"
-keywords: 码志, Zhuang Ma, mzlogin, mazhuang, 闷骚的程序员
+title: Blog
+subtitle: "Ning-Bolg"
+description: "Ning-Bolg"
+keywords: leetcode Ning
 timezone: Asia/Shanghai
 encoding: "utf-8"
 repository: ninghuang456.github.io
