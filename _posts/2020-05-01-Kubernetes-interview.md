@@ -11,8 +11,24 @@ tool or system that is used to automate tasks such as the management, monitoring
 scaling, and deployment of containerized applications. It is used to easily manage several containers 
 (since it can handle grouping of containers), which provides for logical units that can be discovered and managed.
 
-## 2. What are K8s? 
-K8s is another term for Kubernetes. 
+## 2. Why you need Kubernetes and what it can do 
+Containers are a good way to bundle and run your applications. In a production environment, you need to manage the containers that run the applications and ensure that there is no downtime. For example, if a container goes down, another container needs to start. Wouldn't it be easier if this behavior was handled by a system?
+
+That's how Kubernetes comes to the rescue! Kubernetes provides you with a framework to run distributed systems resiliently. It takes care of scaling and failover for your application, provides deployment patterns, and more. For example, Kubernetes can easily manage a canary deployment for your system.
+
+Kubernetes provides you with:
+
+Service discovery and load balancing 
+Kubernetes can expose a container using the DNS name or using their own IP address. If traffic to a container is high, Kubernetes is able to load balance and distribute the network traffic so that the deployment is stable.
+Storage orchestration 
+Kubernetes allows you to automatically mount a storage system of your choice, such as local storages, public cloud providers, and more.
+Automated rollouts and rollbacks 
+You can describe the desired state for your deployed containers using Kubernetes, and it can change the actual state to the desired state at a controlled rate. For example, you can automate Kubernetes to create new containers for your deployment, remove existing containers and adopt all their resources to the new container.
+Automatic bin packing 
+You provide Kubernetes with a cluster of nodes that it can use to run containerized tasks. You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can fit containers onto your nodes to make the best use of your resources.
+Self-healing Kubernetes restarts containers that fail, replaces containers, kills containers that don't respond to your user-defined health check, and doesn't advertise them to clients until they are ready to serve.
+Secret and configuration management 
+Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens, and SSH keys. You can deploy and update secrets and application configuration without rebuilding your container images, and without exposing secrets in your stack configuration.
 
 ## 3. What is orchestration when it comes to software and DevOps? 
 Orchestration refers to the integration of multiple services that allows them to automate processes or synchronize information in a timely fashion. Say, for example, you have six or seven microservices for an application to run. If you place them in separate containers, this would inevitably create obstacles for communication. Orchestration would help in such a situation by enabling all services in individual containers to work seamlessly to accomplish a single goal. 
@@ -69,64 +85,55 @@ The kube-scheduler assigns nodes to newly created pods.
 ## 16. What is a cluster of containers in Kubernetes? 
 A cluster of containers is a set of machine elements that are nodes. Clusters initiate specific routes so that the containers running on the nodes can communicate with each other. In Kubernetes, the container engine (not the server of the Kubernetes API) provides hosting for the API server.
 
-## 17. What is the Google Container Engine?
-The Google Container Engine is an open-source management platform tailor-made for Docker containers and clusters to provide support for the clusters that run in Google public cloud services. 
-
-## 18. What are Daemon sets?
-A Daemon set is a set of pods that runs only once on a host. They are used for host layer attributes like a network or for monitoring a network, which you may not need to run on a host more than once.
-
-## 19. What is ‘Heapster’ in Kubernetes?
-In this Kubernetes interview question, the interviewer would expect a thorough explanation. You can explain what it is and also it has been useful to you (if you have used it in your work so far!). A Heapster is a performance monitoring and metrics collection system for data collected by the Kublet. This aggregator is natively supported and runs like any other pod within a Kubernetes cluster, which allows it to discover and query usage data from all nodes within the cluster.
-
-## 20. What is Minikube?
+## 17. What is Minikube?
 With the help of Minikube, users can Kubernetes locally. This process lets the user run a single-node Kubernetes cluster on your personal computer, including Windows, macOS, and Linus PCs. With this, users can try out Kubernetes also for daily development work.
 
-## 21. What is a Namespace in Kubernetes?
+## 18. What is a Namespace in Kubernetes?
 Namespaces are used for dividing cluster resources between multiple users. They are meant for environments where there are many users spread across projects or teams and provide a scope of resources.
 
-## 22. Name the initial namespaces from which Kubernetes starts?
+## 19. Name the initial namespaces from which Kubernetes starts?
 Default
 Kube – system
 Kube – public
-## 23. What is the Kubernetes controller manager?
+## 20. What is the Kubernetes controller manager?
 The controller manager is a daemon that is used for embedding core control loops, garbage collection, and Namespace creation. It enables the running of multiple processes on the master node even though they are compiled to run as a single process.
 
-## 24. What are the types of controller managers?
+## 21. What are the types of controller managers?
 The primary controller managers that can run on the master node are the endpoints controller, service accounts controller, namespace controller, node controller, token controller, and replication controller.
 
-## 25. What is etcd?
+## 22. What is etcd?
 Kubernetes uses etcd as a distributed key-value store for all of its data, including metadata and configuration data, and allows nodes in Kubernetes clusters to read and write data. Although etcd was purposely built for CoreOS, it also works on a variety of operating systems (e.g., Linux, BSB, and OS X) because it is open-source. Etcd represents the state of a cluster at a specific moment in time and is a canonical hub for state management and cluster coordination of a Kubernetes cluster.
 
-## 26. What are the different services within Kubernetes?
+## 23. What are the different services within Kubernetes?
 Different types of Kubernetes services include: 
 
 Cluster IP service
 Node Port service
 External Name Creation service and 
 Load Balancer service
-## 27. What is ClusterIP?
+## 24. What is ClusterIP?
 The ClusterIP is the default Kubernetes service that provides a service inside a cluster (with no external access) that other apps inside your cluster can access. 
 
-## 28. What is NodePort? 
+## 25. What is NodePort? 
 The NodePort service is the most fundamental way to get external traffic directly to your service. It opens a specific port on all Nodes and forwards any traffic sent to this port to the service.
 
-## 29. What is the LoadBalancer in Kubernetes? 
+## 26. What is the LoadBalancer in Kubernetes? 
 The LoadBalancer service is used to expose services to the internet. A Network load balancer, for example, creates a single IP address that forwards all traffic to your service. 
 
-## 30. What is the Ingress network, and how does it work?
+## 27. What is the Ingress network, and how does it work?
  An ingress is an object that allows users to access your Kubernetes services from outside the Kubernetes cluster. Users can configure the access by creating rules that define which inbound connections reach which services.
 
 How does it work- This is an API object that provides the routing rules to manage the external users' access to the services in the Kubernetes cluster through HTTPS/ HTTP. With this, users can easily set up the rules for routing traffic without creating a bunch of load balancers or exposing each service to the nodes.
 
-## 31. What do you understand by Cloud controller manager?
+## 28. What do you understand by Cloud controller manager?
 You must have heard about Public, Private and hybrid clouds. With the help of cloud infrastructure technologies, you can run Kubernetes on them. In the context of Cloud Controller Manager, it is the control panel component that embeds the cloud-specific control logic. This process lets you link the cluster into the cloud provider's API and separates the elements that interact with the cloud platform from components that only interact with your cluster. 
 
 This also enables the cloud providers to release the features at a different pace compared to the main Kubernetes project. It is structured using a plugin mechanism and allows various cloud providers to integrate their platforms with Kubernetes.
 
-## 32. What is Container resource monitoring?
+## 29. What is Container resource monitoring?
 This refers to the activity that collects the metrics and tracks the health of containerized applications and microservices environments. It helps to improve health and performance and also makes sure that they operate smoothly.
 
-## 33. What is the difference between a replica set and a replication controller?
+## 30. What is the difference between a replica set and a replication controller?
 A replication controller is referred to as RC in short. It is a wrapper on a pod. This provides additional functionality to the pods, which offers replicas. 
 
 It monitors the pods and automatically restarts them if they fail. If the node fails, this controller will respawn all the pods of that node on another node. If the pods die, they won't be spawned again unless wrapped around a replica set. 
@@ -135,10 +142,10 @@ Replica Set, on the other hand, is referred to as rs in short. It is told as the
 
 It allows filtering by label values and keys. To match the object, they have to satisfy all the specified label constraints.
 
-## 34. What is a headless service?
+## 31. What is a headless service?
 A headless service is used to interface with service discovery mechanisms without being tied to a ClusterIP, therefore allowing you to directly reach pods without having to access them through a proxy. It is useful when neither load balancing nor a single Service IP is required. 
 
-## 35. What are federated clusters?
+## 32. What are federated clusters?
 The aggregation of multiple clusters that treat them as a single logical cluster refers to cluster federation. In this, multiple clusters may be managed as a single cluster. They stay with the assistance of federated groups. Also, users can create various clusters within the data center or cloud and use the federation to control or manage them in one place. 
 
 You can perform cluster federation by doing the following: 
@@ -147,17 +154,42 @@ Cross cluster that provides the ability to have DNS and Load Balancer with backe
 
 Users can sync resources across different clusters in order to deploy the same deployment set across the various clusters.
 
-## 36. What is Kubelet?
+## 33. What is Kubelet?
 The kubelet is a service agent that controls and maintains a set of pods by watching for pod specs through the Kubernetes API server. It preserves the pod lifecycle by ensuring that a given set of containers are all running as they should. The kubelet runs on each node and enables the communication between the master and slave nodes.
 
-## 37. What is Kubectl?
+## 34. What is Kubectl?
 Kubectl is a CLI (command-line interface) that is used to run commands against Kubernetes clusters. As such, it controls the Kubernetes cluster manager through different create and manage commands on the Kubernetes component
 
-## 38. Give examples of recommended security measures for Kubernetes.
+## 35. Give examples of recommended security measures for Kubernetes.
 Examples of standard Kubernetes security measures include defining resource quotas, support for auditing, restriction of etcd access, regular security updates to the environment, network segmentation, definition of strict resource policies, continuous scanning for security vulnerabilities, and using images from authorized repositories.
 
-## 39. What is Kube-proxy? 
+## 36. What is Kube-proxy? 
 Kube-proxy is an implementation of a load balancer and network proxy used to support service abstraction with other networking operations. Kube-proxy is responsible for directing traffic to the right container based on IP and the port number of incoming requests.
 
-## 40. How can you get a static IP for a Kubernetes load balancer? 
+## 37. How can you get a static IP for a Kubernetes load balancer? 
 A static IP for the Kubernetes load balancer can be achieved by changing DNS records since the Kubernetes Master can assign a new static IP address.
+
+## 38 kubectl command
+# Get commands with basic output
+kubectl get services                          # List all services in the namespace
+kubectl get pods --all-namespaces             # List all pods in all namespaces
+kubectl get pods -o wide                      # List all pods in the current namespace, with more details
+kubectl get deployment my-dep                 # List a particular deployment
+kubectl get pods                              # List all pods in the namespace
+kubectl get pod my-pod -o yaml                # Get a pod's YAML
+
+# Describe commands with verbose output
+kubectl describe nodes my-node
+kubectl describe pods my-pod
+
+# List Services Sorted by Name
+kubectl get services --sort-by=.metadata.name
+
+# List pods Sorted by Restart Count
+kubectl get pods --sort-by='.status.containerStatuses[0].restartCount'
+
+# List PersistentVolumes sorted by capacity
+kubectl get pv --sort-by=.spec.capacity.storage
+
+## Link
+[kubectl Cheat Sheet]: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
