@@ -1,147 +1,163 @@
 ---
 layout: post
-title: 使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源
-categories: GitHub
-description: 使用 jsdelivr CDN 加速 GitHub Pages 博客的静态资源。
-keywords: GitHub, CDN, jsdelivr
+title: Kubernetes Interview Questions and Answers
+categories: Cloud
+description: Kubernetes Interview Questions and Answers
+keywords: cloud, k8s, Kubernetes
 ---
+## 1. What is Kubernetes?
+This is one of the most basic Kubernetes interview questions yet one of the most important ones! Kubernetes is an open-source container orchestration 
+tool or system that is used to automate tasks such as the management, monitoring, 
+scaling, and deployment of containerized applications. It is used to easily manage several containers 
+(since it can handle grouping of containers), which provides for logical units that can be discovered and managed.
 
-挺久以前就有网友给我的 GitHub Pages 博客模板提 [Issue](https://github.com/mzlogin/mzlogin.github.io/issues/65)，说希望能增加 CDN 用于加速静态资源的加载，由于懒，一直没有动。
+## 2. What are K8s? 
+K8s is another term for Kubernetes. 
 
-最近偶尔要打开自己博客看下 Wiki 的时候，要等挺久，比较痛苦，碰巧昨天晚上看到这样一篇帖子：[GitHub 图床的正确用法，通过 jsDelivr CDN 全球加速](https://hacpai.com/article/1583894928771)，感觉很适合我的需求场景，于是决定趁这几天休假将这个改造一下。
+## 3. What is orchestration when it comes to software and DevOps? 
+Orchestration refers to the integration of multiple services that allows them to automate processes or synchronize information in a timely fashion. Say, for example, you have six or seven microservices for an application to run. If you place them in separate containers, this would inevitably create obstacles for communication. Orchestration would help in such a situation by enabling all services in individual containers to work seamlessly to accomplish a single goal. 
 
-## 先看效果
+## 4. How are Kubernetes and Docker related?
+This is one of the most frequently asked Kubernetes interview questions, where the interviewer might as well ask you to share your experience working with any of them. Docker is an open-source platform used to handle software development. Its main benefit is that it packages the settings and dependencies that the software/application needs to run into a container, which allows for portability and several other advantages. Kubernetes allows for the manual linking and orchestration of several containers, running on multiple hosts that have been created using Docker. 
 
-以下改造前后的加载情况都是在 Edge 浏览器禁用缓存后录制的，录制时间段很接近，从本地访问两个 GitHub Pages 服务的原始响应速度应该类似。
+## 5. What are the main differences between the Docker Swarm and Kubernetes?
+Docker Swarm is Docker’s native, open-source container orchestration platform that is used to cluster and schedule Docker containers. Swarm differs from Kubernetes in the following ways:
 
-### 改造前加载
+Docker Swarm is more convenient to set up but doesn’t have a robust cluster, while Kubernetes is more complicated to set up but the benefit of having the assurance of a robust cluster
+Docker Swarm can’t do auto-scaling (as can Kubernetes); however, Docker scaling is five times faster than Kubernetes 
+Docker Swarm doesn’t have a GUI; Kubernetes has a GUI in the form of a dashboard 
+Docker Swarm does automatic load balancing of traffic between containers in a cluster, while Kubernetes requires manual intervention for load balancing such traffic  
+Docker requires third-party tools like ELK stack for logging and monitoring, while Kubernetes has integrated tools for the same 
+Docker Swarm can share storage volumes with any container easily, while Kubernetes can only share storage volumes with containers in the same pod
+Docker can deploy rolling updates but can’t deploy automatic rollbacks; Kubernetes can deploy rolling updates as well as automatic rollbacks
 
-![before use cdn](/images/posts/github/cdn-before.png)
+## 6. What is the difference between deploying applications on hosts and containers?
+Deploying Applications consist of an architecture that has an operating system. The operating system will have a kernel that holds various libraries installed on the operating system needed for an application.
 
-*注：由于改造前没有保留加载图，所以这是截的一个使用相同模板的朋友的首页加载情况。*
+Whereas container host refers to the system that runs the containerized processes. This kind is isolated from the other applications; therefore, the applications must have the necessary libraries. The binaries are separated from the rest of the system and cannot infringe any other application.
 
-可以看到耗时最长的两个请求时间达到了 12 秒左右，而且很多资源的加载时间在 1 秒以上，页面完成加载时间长达 15 秒多……估计一般的访客是没这个耐心等待的。
+## 7. What are the features of Kubernetes?
+Kubernetes places control for the user where the server will host the container. It will control how to launch. So, Kubernetes automates various manual processes. 
+Kubernetes manages various clusters at the same time. 
+It provides various additional services like management of containers, security, networking, and storage. 
+Kubernetes self-monitors the health of nodes and containers. 
+With Kubernetes, users can scale resources not only vertically but also horizontally that too easily and quickly.
+## 8. What are the main components of Kubernetes architecture?
+There are two primary components of Kubernetes Architecture: the master node and the worker node. Each of these components has individual components in them.
 
-### 改造后加载
+## 9. Explain the working of the master node in Kubernetes?
+The master node dignifies the node that controls and manages the set of worker nodes. This kind resembles a cluster in Kubernetes. The nodes are responsible for the cluster management and the API used to configure and manage the resources within the collection. The master nodes of Kubernetes can run with Kubernetes itself, the asset of dedicated pods.
 
-![after use cdn](/images/posts/github/cdn-after.png)
+## 10. What is the role of Kube-apiserver?
+This kind validates and provides configuration data for the API objects. It includes pods, services, replication controllers. Also, it provides REST operations and also the frontend of the cluster. This frontend cluster state is shared through which all other component interacts.
 
-这样一对比效果还是很明显的。改造过后耗时最长的是两个没办法走 CDN 的请求，而走 CDN 的那些资源加载时间基本都没超过 60 毫秒，页面完成加载时间缩短到了 3 秒以内。
+## 11. What is a node in Kubernetes?
+A node is the smallest fundamental unit of computing hardware. It represents a single machine in a cluster, which could be a physical machine in a data center or a virtual machine from a cloud provider. Each machine can substitute any other machine in a Kubernetes cluster. The master in Kubernetes controls the nodes that have containers. 
 
-当然，因为页面自身还是在 GitHub Pages 托管，有时候首个请求还是会挺久才返回。
+## 12. What does the node status contain?
+The main components of a node status are Address, Condition, Capacity, and Info.
 
-改造后的效果可以打开 <https://mazhuang.org> 体验。
+## 13. What process runs on Kubernetes Master Node? 
+The Kube-api server process runs on the master node and serves to scale the deployment of more instances.
 
-## 方案考虑
+## 14. What is a pod in Kubernetes?
+In this Kubernetes interview question, try giving a thorough answer instead of a one-liner. Pods are high-level structures that wrap one or more containers. This is because containers are not run directly in Kubernetes. Containers in the same pod share a local network and the same resources, allowing them to easily communicate with other containers in the same pod as if they were on the same machine while at the same time maintaining a degree of isolation.
 
-优化独立博客的加载速度有一些不同的思路，对应不同的方案：
+## 15. What is the job of the kube-scheduler?
+The kube-scheduler assigns nodes to newly created pods.
 
-1. 优化博客代码，精简需要加载的资源；
-2. 将博客部署到国内访问快的服务器上；
-3. 部署到国内的代码托管平台，比如 Gitee 和 Coding 等；
-4. 采用 CDN 加速；
-5. 等等。
+## 16. What is a cluster of containers in Kubernetes? 
+A cluster of containers is a set of machine elements that are nodes. Clusters initiate specific routes so that the containers running on the nodes can communicate with each other. In Kubernetes, the container engine (not the server of the Kubernetes API) provides hosting for the API server.
 
-其中 2 和 3 我不想考虑，还是期望只在 GitHub 上管理博客，所以 1 和 4 是优化方向，本文对应的就是 4 的部分。
+## 17. What is the Google Container Engine?
+The Google Container Engine is an open-source management platform tailor-made for Docker containers and clusters to provide support for the clusters that run in Google public cloud services. 
 
-而采用 CDN 加速的方案，可以考虑
+## 18. What are Daemon sets?
+A Daemon set is a set of pods that runs only once on a host. They are used for host layer attributes like a network or for monitoring a network, which you may not need to run on a host more than once.
 
-- 将公共库改为直接引用公共 CDN 链接；
-- 自己编写和修改的静态资源自己去托管在一个 CDN 服务上。
+## 19. What is ‘Heapster’ in Kubernetes?
+In this Kubernetes interview question, the interviewer would expect a thorough explanation. You can explain what it is and also it has been useful to you (if you have used it in your work so far!). A Heapster is a performance monitoring and metrics collection system for data collected by the Kublet. This aggregator is natively supported and runs like any other pod within a Kubernetes cluster, which allows it to discover and query usage data from all nodes within the cluster.
 
-    有一些 CDN 服务商提供一定的免费额度，可以按喜好选用，或者选择付费服务。这里我没有纠结，看完文首提到的那篇文章，去看了下 jsDelivr 的介绍后觉得靠谱：它原生支持使用 GitHub 项目里的资源，什么都不用配置，更重要的是免费，在国内有节点，而且速度还不错（官网上也把 works in China 作为一个卖点的），遂决定直接用它。
+## 20. What is Minikube?
+With the help of Minikube, users can Kubernetes locally. This process lets the user run a single-node Kubernetes cluster on your personal computer, including Windows, macOS, and Linus PCs. With this, users can try out Kubernetes also for daily development work.
 
-## jsDelivr 支持的 GitHub 资源的方式
+## 21. What is a Namespace in Kubernetes?
+Namespaces are used for dividing cluster resources between multiple users. They are meant for environments where there are many users spread across projects or teams and provide a scope of resources.
 
-jsDelivr 对 GitHub 的支持是作为重要特性来宣传的，官网的介绍链接：<https://www.jsdelivr.com/features#gh>，以下是一些认为需要了解的知识的小结：
+## 22. Name the initial namespaces from which Kubernetes starts?
+Default
+Kube – system
+Kube – public
+## 23. What is the Kubernetes controller manager?
+The controller manager is a daemon that is used for embedding core control loops, garbage collection, and Namespace creation. It enables the running of multiple processes on the master node even though they are compiled to run as a single process.
 
-这里以我托管博客的 GitHub 仓库为例，地址是 `https://github.com/mzlogin/mzlogin.github.io`，那它里面的资源可以直接以 `https://cdn.jsdelivr.net/gh/mzlogin/mzlogin.github.io/` + `仓库里的文件路径` 来访问。
+## 24. What are the types of controller managers?
+The primary controller managers that can run on the master node are the endpoints controller, service accounts controller, namespace controller, node controller, token controller, and replication controller.
 
-比如仓库里有一个 js 文件 `assets/js/main.js`，那么它可以用 CDN 链接 `https://cdn.jsdelivr.net/gh/mzlogin/mzlogin.github.io/assets/js/main.js` 来访问。
+## 25. What is etcd?
+Kubernetes uses etcd as a distributed key-value store for all of its data, including metadata and configuration data, and allows nodes in Kubernetes clusters to read and write data. Although etcd was purposely built for CoreOS, it also works on a variety of operating systems (e.g., Linux, BSB, and OS X) because it is open-source. Etcd represents the state of a cluster at a specific moment in time and is a canonical hub for state management and cluster coordination of a Kubernetes cluster.
 
-另外还支持一些高级用法，比如：
+## 26. What are the different services within Kubernetes?
+Different types of Kubernetes services include: 
 
-1. 指定 release 版本号/提交 sha1/分支名称，例如指定获取该仓库的名称为 `1.2.0` 或 `v1.2.0` 的 release 版本资源：
+Cluster IP service
+Node Port service
+External Name Creation service and 
+Load Balancer service
+## 27. What is ClusterIP?
+The ClusterIP is the default Kubernetes service that provides a service inside a cluster (with no external access) that other apps inside your cluster can access. 
 
-    ```
-    https://cdn.jsdelivr.net/gh/mzlogin/mzlogin.github.io@1.2.0/assets/js/main.js
-    ```
+## 28. What is NodePort? 
+The NodePort service is the most fundamental way to get external traffic directly to your service. It opens a specific port on all Nodes and forwards any traffic sent to this port to the service.
 
-    如果指定版本为 `1` 或者 `1.2`，那它会自动匹配到这个范围内的最新版本号。
+## 29. What is the LoadBalancer in Kubernetes? 
+The LoadBalancer service is used to expose services to the internet. A Network load balancer, for example, creates a single IP address that forwards all traffic to your service. 
 
-    也可以不指定版本或者指定版本为 `latest`，这样总是使用最新版本的资源。
+## 30. What is the Ingress network, and how does it work?
+ An ingress is an object that allows users to access your Kubernetes services from outside the Kubernetes cluster. Users can configure the access by creating rules that define which inbound connections reach which services.
 
-2. 压缩资源，在 js/css 文件后缀前面加上 `.min`：
+How does it work- This is an API object that provides the routing rules to manage the external users' access to the services in the Kubernetes cluster through HTTPS/ HTTP. With this, users can easily set up the rules for routing traffic without creating a bunch of load balancers or exposing each service to the nodes.
 
-    ```
-    https://cdn.jsdelivr.net/gh/mzlogin/mzlogin.github.io@1.2.0/assets/js/main.min.js
-    ```
+## 31. What do you understand by Cloud controller manager?
+You must have heard about Public, Private and hybrid clouds. With the help of cloud infrastructure technologies, you can run Kubernetes on them. In the context of Cloud Controller Manager, it is the control panel component that embeds the cloud-specific control logic. This process lets you link the cluster into the cloud provider's API and separates the elements that interact with the cloud platform from components that only interact with your cluster. 
 
-3. 合并多个文件，用 `combine/file1,file2,file3` 格式的链接：
+This also enables the cloud providers to release the features at a different pace compared to the main Kubernetes project. It is structured using a plugin mechanism and allows various cloud providers to integrate their platforms with Kubernetes.
 
-    ```
-    https://cdn.jsdelivr.net/combine/gh/mzlogin/mzlogin.github.io@1.2.0/assets/js/main.min.js,gh/mzlogin/mzlogin.github.io@1.2.0/assets/js/simple-jekyll-search.min.js
-    ```
+## 32. What is Container resource monitoring?
+This refers to the activity that collects the metrics and tracks the health of containerized applications and microservices environments. It helps to improve health and performance and also makes sure that they operate smoothly.
 
-压缩资源、合并文件的 CDN 链接在第一次有人访问时可能比较慢，后面再有人访问就快了。
+## 33. What is the difference between a replica set and a replication controller?
+A replication controller is referred to as RC in short. It is a wrapper on a pod. This provides additional functionality to the pods, which offers replicas. 
 
-其它知识点：
+It monitors the pods and automatically restarts them if they fail. If the node fails, this controller will respawn all the pods of that node on another node. If the pods die, they won't be spawned again unless wrapped around a replica set. 
 
-- 可以通过 `https://cdn.jsdelivr.net/combine/gh/mzlogin/mzlogin.github.io[@<版本号>]/[<文件夹>/]` 这样的路径浏览缓存文件列表；
-- 可以访问 `https://purge.jsdelivr.net/gh/mzlogin/mzlogin.github.io@1.2.0/assets/js/main.js` 来清除指定文件的缓存；（将引用的 CDN 链接里的 `cdn` 改成 `purge` 就是了）
-- 可以访问 `https://data.jsdelivr.com/v1/package/gh/mzlogin/mzlogin.github.io` 来查看 CDN 上的 tags 和 versions 列表，更多数据接口参数参见 <https://github.com/jsdelivr/data.jsdelivr.com>。
+Replica Set, on the other hand, is referred to as rs in short. It is told as the next-generation replication controller. This kind of support has some selector types and supports the equality-based and the set-based selectors. 
 
-## 改造步骤
+It allows filtering by label values and keys. To match the object, they have to satisfy all the specified label constraints.
 
-下面是记录具体改造博客模板的步骤：
+## 34. What is a headless service?
+A headless service is used to interface with service discovery mechanisms without being tied to a ClusterIP, therefore allowing you to directly reach pods without having to access them through a proxy. It is useful when neither load balancing nor a single Service IP is required. 
 
-1. 在 _config.yml 文件中添加控制开关：
+## 35. What are federated clusters?
+The aggregation of multiple clusters that treat them as a single logical cluster refers to cluster federation. In this, multiple clusters may be managed as a single cluster. They stay with the assistance of federated groups. Also, users can create various clusters within the data center or cloud and use the federation to control or manage them in one place. 
 
-    ```yaml
-    # 对 css 和 js 资源的 cdn 加速配置
-    cdn:
-        jsdelivr:
-            enabled: true
-    ```
+You can perform cluster federation by doing the following: 
 
-2. 修改 _layouts 里的文件，给名为 `assets_base_url` 的变量赋值，用它来代表加载静态资源的根路径：
+Cross cluster that provides the ability to have DNS and Load Balancer with backend from the participating clusters. 
 
-    {% raw %}
-    ```liquid
-    {% assign assets_base_url = site.url %}
-    {% if site.cdn.jsdelivr.enabled %}
-        {% assign assets_base_url = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: '@master' %}
-    {% endif %}
-    ```
-    {% endraw %}
+Users can sync resources across different clusters in order to deploy the same deployment set across the various clusters.
 
-3. 修改以前直接用 {% raw %}`{{ site.url }}`{% endraw %} 拼接的静态资源引用链接，替换为 {% raw %}`{{ assets_base_url }}`{% endraw %}，比如 _includes/header.html 里：
+## 36. What is Kubelet?
+The kubelet is a service agent that controls and maintains a set of pods by watching for pod specs through the Kubernetes API server. It preserves the pod lifecycle by ensuring that a given set of containers are all running as they should. The kubelet runs on each node and enables the communication between the master and slave nodes.
 
-    {% raw %}
-    ```diff
-    - <link rel="stylesheet" href="{{ site.url }}/assets/css/posts/index.css">
-    + <link rel="stylesheet" href="{{ assets_base_url }}/assets/css/posts/index.css">
-    ```
-    {% endraw %}
+## 37. What is Kubectl?
+Kubectl is a CLI (command-line interface) that is used to run commands against Kubernetes clusters. As such, it controls the Kubernetes cluster manager through different create and manage commands on the Kubernetes component
 
-这样万一哪天 CDN 出了点什么状况，我们也可以很方便地通过一个开关就切回自已的资源链接恢复服务。
+## 38. Give examples of recommended security measures for Kubernetes.
+Examples of standard Kubernetes security measures include defining resource quotas, support for auditing, restriction of etcd access, regular security updates to the environment, network segmentation, definition of strict resource policies, continuous scanning for security vulnerabilities, and using images from authorized repositories.
 
-主要就是这类修改，当然涉及的地方有多处，以上只是举一处例子记录示意，改造过程和改造后的代码可以参考我的博客仓库 <https://github.com/mzlogin/mzlogin.github.io>。
+## 39. What is Kube-proxy? 
+Kube-proxy is an implementation of a load balancer and network proxy used to support service abstraction with other networking operations. Kube-proxy is responsible for directing traffic to the right container based on IP and the port number of incoming requests.
 
-## 现存问题
-
-- 如果项目曾经打过 tag，那么新增/修改静态资源后，需要刷新 CDN 缓存的话，需要打个新 tag；
-
-    一般发生在修改了博客模板的 js/css 以后。我也还在摸索如何省去这一步的方法。
-
-    **Update:** 我后来采用的解决方法是删除了所有的 tag，这样以前的 release 就变成了 Draft，对外是不可见的，因为我这个仓库不需要对外可见的 release，所以这个问题也就解决了，不需要再操心刷新 CDN 的问题了。
-
-## 参考链接
-
-- [GitHub 图床的正确用法，通过 jsDelivr CDN 全球加速](https://hacpai.com/article/1583894928771)
-- [jsDelivr 为开发者提供免费公共 CDN 加速服务](https://blog.csdn.net/larpland/article/details/101349605)
-- [Features - jsDelivr](https://www.jsdelivr.com/features)
-
-## 相关文章
-
-- [使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源（二）](https://mazhuang.org/2020/10/07/cdn-for-github-pages-2/)
+## 40. How can you get a static IP for a Kubernetes load balancer? 
+A static IP for the Kubernetes load balancer can be achieved by changing DNS records since the Kubernetes Master can assign a new static IP address.
