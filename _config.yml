@@ -28,7 +28,7 @@ components:
         start_date: 2020-05-03
     # My Popular Repositories
     side_bar_repo:
-        enabled: true
+        enabled: false
         limit: 5
     # 文章字数统计
     word_count:
@@ -36,7 +36,7 @@ components:
     # 页面右上角，以及「关于」页面的二维码
     # 修改图片请替换 assets/images/qrcode.jpg
     qrcode:
-        enabled: true
+        enabled: false
         image_alt: 闷骚的程序员
     # 维基索引页使用哪种视图，支持 列表（list）/分类（cate）
     wiki:
@@ -102,7 +102,7 @@ markdown: kramdown
 kramdown:
     input: GFM
 highlighter: rouge
-paginate: 10
+paginate: 20
 lsi: false
 quiet: false
 excerpt_separator: "\n\n"
@@ -157,7 +157,7 @@ simple_jekyll_search:
     # 是否支持全文搜索
     fulltext: false
     # 最多显示多少条搜索结果
-    limit: 10
+    limit: 20
 
 # ---------------- #
 #      Google      #
