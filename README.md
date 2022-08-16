@@ -1,12 +1,11 @@
 # 码志
 
-我的个人博客：<https://mazhuang.org>，欢迎 Star 和 Fork。
+我的个人博客：<https://ninghuang456.github.io/blog/>，欢迎 Star 和 Fork。
 
 ## 概览
 
 <!-- vim-markdown-toc GFM -->
 
-* [效果预览](#效果预览)
 * [Fork 指南](#fork-指南)
 * [使用文档](#使用文档)
 * [经验与思考](#经验与思考)
@@ -14,12 +13,6 @@
 * [致谢](#致谢)
 
 <!-- vim-markdown-toc -->
-
-## 效果预览
-
-**[在线预览 &rarr;](https://mazhuang.org)**
-
-![screenshot home](https://mazhuang.org/assets/images/screenshots/home.png)
 
 ## Fork 指南
 
